@@ -25,6 +25,8 @@ class PagesController extends Controller
                 return view('layouts.admin');
             case 'tuteur':
                 return view('layouts.tutor');
+            case 'sage':
+                return view('layouts.tutor');
         }
     }
 }
