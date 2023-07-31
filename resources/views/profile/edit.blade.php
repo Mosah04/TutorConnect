@@ -12,7 +12,7 @@
                 <div class="max-w-screen-xl lg:h-[60vh] h-[40vh] bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply">
                     {{-- <img class="h-auto max-w-lg rounded-lg" src="" alt="image description"> --}}
                 </div>
-                <div class="transform translate-x-[50wh] -translate-y-1/2 inline-block rounded-full bg-blue-800 p-2">
+                <div class="transform translate-x-1/2 -translate-y-1/2 inline-block rounded-full bg-blue-800 p-2">
                     <img class="w-[100px] h-[100px] rounded-full" src="https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg" alt="Rounded avatar">
                 </div>
             </div>
