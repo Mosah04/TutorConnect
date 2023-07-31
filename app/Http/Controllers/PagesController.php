@@ -16,6 +16,10 @@ class PagesController extends Controller
     public function howToRegister(){
         return view('layouts.authOption');
     }
+
+    public function aide(){
+        return view('layouts.aide');
+    }
     public function home(){
         $user = Auth::user();
         switch ($user->role) {
@@ -28,5 +32,10 @@ class PagesController extends Controller
             case 'sage':
                 return view('layouts.tutor');
         }
+    }
+    public function switchPage (Request $request) {
+        return view('layouts.'.$request->input('page'));
+
+
     }
 }

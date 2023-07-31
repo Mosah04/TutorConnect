@@ -22,6 +22,14 @@ Route::get('/howToRegister', [PagesController::class, 'howToRegister']);
 Route::get('/home', [PagesController::class, 'home']
 )->middleware(['auth', 'verified'])->name('home');
 
+Route::get('/aide', [PagesController::class, 'aide'])->name('aide');
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/home', [PagesController::class, 'switchPage'])->name('home');
+    Route::get('/home', [PagesController::class, 'home'])->name('home.switch');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
