@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
-        {{ __('Mot de passe oublié? Pas de soucis. Donnez-nous juste votre adresse et nous vous aidrons à changer votre mot de passe.') }}
+        {{ __('Mot de passe oublié? Pas de soucis. Donnez-nous juste votre adresse et nous vous aiderons à changer votre mot de passe.') }}
     </div>
 
     <!-- Session Status -->
@@ -11,8 +11,7 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            <x-input :label="__('Email')" id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
