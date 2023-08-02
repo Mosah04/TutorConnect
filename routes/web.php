@@ -22,13 +22,26 @@ Route::get('/howToRegister', [PagesController::class, 'howToRegister']);
 Route::get('/home', [PagesController::class, 'home']
 )->middleware(['auth', 'verified'])->name('home');
 
-Route::get('/aide', [PagesController::class, 'aide'])->name('aide');
+
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::post('/home', [PagesController::class, 'switchPage'])->name('home');
-    Route::get('/home', [PagesController::class, 'home'])->name('home.switch');
+    Route::get('/switchPage', [PagesController::class, 'switchPage'])->name('home.switch');
+    Route::get('/home', [PagesController::class, 'home'])->name('home');
+    Route::get('/blogs', [PagesController::class, 'blogs'])->name('blogs');
+    Route::get('/cours', [PagesController::class, 'cours'])->name('cours');
+    Route::get('/aide', [PagesController::class, 'aide'])->name('aide');
+    Route::get('/tuteurs', [PagesController::class, 'tuteurs'])->name('tuteurs');
+    Route::get('/transactions', [PagesController::class, 'transactions'])->name('transactions');
+    Route::get('/inboxes', [PagesController::class, 'inboxes'])->name('inboxes');
+    Route::get('/sessions', [PagesController::class, 'sessions'])->name('sessions');
+    Route::get('/panier', [PagesController::class, 'panier'])->name('panier');
+    Route::get('/agenda', [PagesController::class, 'agenda'])->name('agenda');
+    Route::get('/mesCours', [PagesController::class, 'mesCours'])->name('mesCours');
+    Route::get('/mesBlogs', [PagesController::class, 'mesBlogs'])->name('mesBlogs');
+    Route::get('/profil', [PagesController::class, 'profil'])->name('profil');
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

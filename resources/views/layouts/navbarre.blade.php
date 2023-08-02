@@ -1,4 +1,4 @@
-<nav class="fixed top-0 z-50 w-full bg-blue-500 border-b border-gray-200 dark:bg-blue-800 dark:border-gray-700">
+<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center justify-start">
@@ -8,11 +8,14 @@
                  <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
               </svg>
            </button>
-          <a href="https://tutorconnect.test" class="flex ml-2 md:mr-24">
+          <a href="{{url('/')}}" class="flex ml-2 md:mr-24">
             <img src="{{asset('img/TutoConn.png')}}" class="h-8 mr-3" alt="TutorConnect Logo" />
             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">TutorConnect</span>
           </a>
         </div>
+        <div  class="font-bold text-xl">
+            {{$slot}}
+       </div>
         <div class="flex items-center">
             <div class="flex items-center ml-3">
                 <a href="{{url('/home')}}">
@@ -44,7 +47,7 @@
                 </div>
                 <ul class="py-1" role="none">
                   <li>
-                    <a href="{{url('/profile')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Profil</a>
+                    <a href="{{url('/profil')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Profil</a>
                   </li>
                   <li>
                     <form method="POST" action="{{ route('logout') }}">
