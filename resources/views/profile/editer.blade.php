@@ -1,5 +1,3 @@
-<div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
         <article class="flex lg:flex-row flex-col no-wrap bg-white">
             <aside class="flex flex-col lg:border-l-2 lg:border-t-2 lg:border-b-2 border-gray-800 lg:w-[30%]">
                 <div class="inline-block flex flex-col">
@@ -41,5 +39,3 @@
                 </div>
             </div>
         </article>
-    </div>
-</div>
