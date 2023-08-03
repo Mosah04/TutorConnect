@@ -19,7 +19,14 @@
             @yield("navbarre")
             @yield("menu")
             <main>
-               @yield('main')
+                <div class="p-4 sm:ml-64">
+                    <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-700 mt-14">
+
+                      @yield('main')
+
+                    </div>
+                </div>
+
             </main>
         </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
