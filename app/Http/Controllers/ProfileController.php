@@ -16,9 +16,16 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $user = $request->user();
+        switch ($user->role) {
+            case 'etudiant':
+                return view('student.profil')->with('user',$user);
+            case 'tuteur':
+                return view('tutor.profil')->with('user',$user);
+            case 'sage':
+                $page = session('page');
+                return view($page.'.profil')->with('user',$user);
+        }
     }
 
     /**
@@ -34,7 +41,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profil')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     /**

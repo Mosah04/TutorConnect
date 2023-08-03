@@ -39,7 +39,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/agenda', [PagesController::class, 'agenda'])->name('agenda');
     Route::get('/mesCours', [PagesController::class, 'mesCours'])->name('mesCours');
     Route::get('/mesBlogs', [PagesController::class, 'mesBlogs'])->name('mesBlogs');
-    Route::get('/profil', [PagesController::class, 'profil'])->name('profil');
 });
 
 
@@ -48,9 +47,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profil', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/editAccount', [ProfileController::class, 'edit'])->name('editAccount');
+    Route::get('/deleteAccount', [ProfileController::class, 'edit'])->name('deleteAccount');
 });
 
 require __DIR__.'/auth.php';

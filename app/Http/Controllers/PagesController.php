@@ -198,21 +198,6 @@ class PagesController extends Controller
 
     }
 
-    public function profil(){
-
-        $user = Auth::user();
-        switch ($user->role) {
-            case 'etudiant':
-                return view('student.profil')->with('user',$user);
-            case 'tuteur':
-                return view('tutor.profil')->with('user',$user);
-            case 'sage':
-                $page = session('page');
-                return view($page.'.profil')->with('user',$user);
-        }
-    }
-
-
     public function switchPage () {
         if(session('page')=='tutor'){
         session()->put('page', 'student');
