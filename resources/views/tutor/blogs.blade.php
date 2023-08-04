@@ -1,6 +1,6 @@
 @extends('layouts.tutor')
 @section('main')
-<article class="py-6 border-2 border-gray-200 rounded-lg dark:border-gray-700 mt-4">
+<article class="py-6 px-6 border-2 border-gray-200 rounded-lg dark:border-gray-700 mt-4">
     <div class="flex items-center justify-between mb-3 text-gray-500">
         <span class="text-sm"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Publié</font></font> <time datetime="1677146503000"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">il y a 5 min</font></font></time></span>
     </div>

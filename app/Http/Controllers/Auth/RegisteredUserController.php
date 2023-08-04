@@ -47,7 +47,11 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        $user = Auth::user();
+        if($user->role=='sage'){
+            session()->put('page', 'tutor');
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
         return redirect(RouteServiceProvider::HOME);
     }
 }

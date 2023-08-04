@@ -31,9 +31,9 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
         if($user->role=='sage'){
             session()->put('page', 'tutor');
-            return redirect()->intended(RouteServiceProvider::HOME)->with('user', $user);
+            return redirect()->intended(RouteServiceProvider::HOME);
         }
-        return redirect()->intended(RouteServiceProvider::HOME)->with('user', $user);
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**
