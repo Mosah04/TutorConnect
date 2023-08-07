@@ -44,6 +44,19 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
+    public function editCompetences(Request $request){
+        $user = $request->user();
+        switch ($user->role) {
+            case 'etudiant':
+                return view('student.profil')->with('competences', null);
+            case 'tuteur':
+                return view('tutor.profil')->with('competences', null);
+            case 'sage':
+                $page = session('page');
+                return view($page.'.profil')->with('competences', null);
+        }
+    }
+
     /**
      * Delete the user's account.
      */

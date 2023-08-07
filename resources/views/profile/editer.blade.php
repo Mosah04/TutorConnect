@@ -11,7 +11,7 @@
                 <a href="{{url('/editAccount')}}" class="{{request()->is('editAccount')?'text-white bg-gray-600':''}} text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Sécurité du compte</a>
                 <a href="#" class="text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Parcours académique</a>
                 <a href="#" class="text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Parcours professionnel</a>
-                <a href="#" class="text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Compétences</a>
+                <a href="{{url('/editCompetences')}}" class="{{request()->is('editCompetences')?'text-white bg-gray-600':''}} text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Compétences</a>
                 @if (Auth::user()->role!="etudiant")
                 <a href="#" class="text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Disponiblités</a>
                 <a href="#" class="text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Tarifs</a>
@@ -34,7 +34,9 @@
                         @if (request()->is('deleteAccount'))
                             @include('profile.partials.delete-user-form')
                         @endif
-                            @yield('contenu')
+                        @if (request()->is('editCompetences'))
+                            @include('profile.partials.competences')
+                        @endif
                     </div>
                 </div>
             </div>

@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/editAccount', [ProfileController::class, 'edit'])->name('editAccount');
     Route::get('/deleteAccount', [ProfileController::class, 'edit'])->name('deleteAccount');
+    Route::get('/editCompetences', [ProfileController::class, 'editCompetences'])->name('editCompetences');
 });
 
 require __DIR__.'/auth.php';
