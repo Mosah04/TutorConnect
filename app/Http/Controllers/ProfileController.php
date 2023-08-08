@@ -16,6 +16,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+
         $user = $request->user();
         switch ($user->role) {
             case 'etudiant':
@@ -56,6 +57,50 @@ class ProfileController extends Controller
                 return view($page.'.profil')->with('competences', null);
         }
     }
+    public function editParcours(Request $request): View
+    {
+
+        $user = $request->user();
+        switch ($user->role) {
+            case 'etudiant':
+                return view('student.profil');
+            case 'tuteur':
+                return view('tutor.profil');
+            case 'sage':
+                $page = session('page');
+                return view($page.'.profil');
+        }
+    }
+    public function editParcourspro(Request $request): View
+    {
+
+        $user = $request->user();
+        switch ($user->role) {
+            case 'etudiant':
+                return view('student.profil');
+            case 'tuteur':
+                return view('tutor.profil');
+            case 'sage':
+                $page = session('page');
+                return view($page.'.profil');
+        }
+    }
+
+    public function editDisponibilite(Request $request): View
+    {
+
+        $user = $request->user();
+        switch ($user->role) {
+            case 'etudiant':
+                return view('student.profil');
+            case 'tuteur':
+                return view('tutor.profil');
+            case 'sage':
+                $page = session('page');
+                return view($page.'.profil');
+        }
+    }
+
 
     /**
      * Delete the user's account.
@@ -77,4 +122,6 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+
 }

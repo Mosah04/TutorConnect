@@ -9,11 +9,11 @@
                 </div>
                 <a href="{{url('/profil')}}" class="{{request()->is('profil')?'text-white bg-gray-600':''}} text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Informations du profil</a>
                 <a href="{{url('/editAccount')}}" class="{{request()->is('editAccount')?'text-white bg-gray-600':''}} text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Sécurité du compte</a>
-                <a href="#" class="text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Parcours académique</a>
-                <a href="#" class="text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Parcours professionnel</a>
+                <a href="{{url('/editParcours')}}" class="{{request()->is('editParcours')?'text-white bg-gray-600':''}} text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Parcours académique</a>
+                <a href="{{url('/editParcourspro')}}" class="{{request()->is('editParcourspro')?'text-white bg-gray-600':''}} text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Parcours professionnel</a>
                 <a href="{{url('/editCompetences')}}" class="{{request()->is('editCompetences')?'text-white bg-gray-600':''}} text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Compétences</a>
                 @if (Auth::user()->role!="etudiant")
-                <a href="#" class="text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Disponiblités</a>
+                <a href="{{url('/editDisponibilite')}}" class="{{request()->is('editDisponibilite')?'text-white bg-gray-600':''}} text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Disponiblités</a>
                 <a href="#" class="text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Tarifs</a>
                 @endif
                 <a href="{{url('/deleteAccount')}}" class="{{request()->is('deleteAccount')?'text-white bg-gray-600':''}} text-center py-2 hover:text-white hover:bg-gray-600 transition-background duration-200 ease-in-out">Retrait du compte</a>
@@ -37,6 +37,16 @@
                         @if (request()->is('editCompetences'))
                             @include('profile.partials.competences')
                         @endif
+                        @if (request()->is('editParcours'))
+                            @include('profile.partials.editParcours')
+                        @endif
+                        @if (request()->is('editParcourspro'))
+                            @include('profile.partials.editParcourspro')
+                        @endif
+                        @if (request()->is('editDisponibilite'))
+                            @include('profile.partials.editDisponibilite')
+                        @endif
+
                     </div>
                 </div>
             </div>
