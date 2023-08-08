@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Competence extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nom'
+    ];
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
