@@ -8,7 +8,7 @@
        <ul class="space-y-2 font-medium">
           <li>
              <a href="{{route('home')}}" class="flex items-center p-2 {{request()->is('home')?'bg-gray-100 dark:bg-gray-700':'text-gray-900 dark:text-white'}} rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" version="1.1" id="Capa_1" width="20px" height="20px" viewBox="0 0 495.398 495.398" xml:space="preserve">
+                <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" version="1.1" id="Capa_1" width="20px" height="20px" viewBox="0 0 495.398 495.398" xml:space="preserve">
                     <g>
                         <g>
                             <g>

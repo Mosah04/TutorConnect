@@ -39,6 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/agenda', [PagesController::class, 'agenda'])->name('agenda');
     Route::get('/mesCours', [PagesController::class, 'mesCours'])->name('mesCours');
     Route::get('/mesBlogs', [PagesController::class, 'mesBlogs'])->name('mesBlogs');
+
 });
 
 
@@ -58,6 +59,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/editCompetences', [ProfileController::class, 'setCompetences'])->name('setCompetences');
     Route::post('/ajouterCompetence', [ProfileController::class, 'ajouterCompetence'])->name('ajouterCompetence');
     Route::post('/changerPhoto', [ProfileController::class, 'changerPhoto'])->name('changerPhoto');
+    Route::get('/editParcours', [ProfileController::class, 'editParcours'])->name('editParcours');
+    Route::get('/editParcourspro', [ProfileController::class, 'editParcourspro'])->name('editParcourspro');
+    Route::get('/editDisponibilite', [ProfileController::class, 'editDisponibilite'])->name('editDisponibilite');
+
+
+
 });
 
 require __DIR__.'/auth.php';

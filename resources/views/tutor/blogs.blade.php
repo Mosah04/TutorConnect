@@ -29,4 +29,3 @@
         </article>
 
 @endsection
-
