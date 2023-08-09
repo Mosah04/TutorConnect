@@ -54,16 +54,21 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/editAccount', [ProfileController::class, 'edit'])->name('editAccount');
     Route::get('/deleteAccount', [ProfileController::class, 'edit'])->name('deleteAccount');
+
     Route::get('/editCompetences', [ProfileController::class, 'editCompetences'])->name('editCompetences');
     Route::get('/retirerCompetence/{competenceId}', [ProfileController::class, 'retirerCompetence'])->name('retiterCompetence');
     Route::post('/editCompetences', [ProfileController::class, 'setCompetences'])->name('setCompetences');
     Route::post('/ajouterCompetence', [ProfileController::class, 'ajouterCompetence'])->name('ajouterCompetence');
+
     Route::post('/changerPhoto', [ProfileController::class, 'changerPhoto'])->name('changerPhoto');
+
     Route::get('/editParcours', [ProfileController::class, 'editParcours'])->name('editParcours');
+    Route::post('/editParcours', [ProfileController::class, 'modifierParcours'])->name('modifierParcours');
+    Route::delete('/editParcours/{id}', [ProfileController::class, 'supprimerParcours'])->name('deleteParcours');
+    Route::post('/ajouterParcours', [ProfileController::class, 'ajouterParcours'])->name('ajouterParcours');
+
     Route::get('/editParcourspro', [ProfileController::class, 'editParcourspro'])->name('editParcourspro');
     Route::get('/editDisponibilite', [ProfileController::class, 'editDisponibilite'])->name('editDisponibilite');
-
-
 
 });
 

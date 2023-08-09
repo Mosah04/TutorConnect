@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\ParcoursAcademique;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request)
     {
 
         $user = $request->user();
@@ -61,7 +62,22 @@ class ProfileController extends Controller
                 return view($page.'.profil')->with('competences', $competences)->with('userCompetences', $userCompetences);
         }
     }
-    public function editParcours(Request $request): View
+    public function editParcours(Request $request)
+    {
+
+        $user = $request->user();
+        $parcoursAcademiques = $user->parcoursAcademiques;
+        switch ($user->role) {
+            case 'etudiant':
+                return view('student.profil')->with('parcoursAcademiques', $parcoursAcademiques);
+            case 'tuteur':
+                return view('tutor.profil')->with('parcoursAcademiques', $parcoursAcademiques);
+            case 'sage':
+                $page = session('page');
+                return view($page.'.profil')->with('parcoursAcademiques', $parcoursAcademiques);
+        }
+    }
+    public function editParcourspro(Request $request)
     {
 
         $user = $request->user();
@@ -75,22 +91,8 @@ class ProfileController extends Controller
                 return view($page.'.profil');
         }
     }
-    public function editParcourspro(Request $request): View
-    {
 
-        $user = $request->user();
-        switch ($user->role) {
-            case 'etudiant':
-                return view('student.profil');
-            case 'tuteur':
-                return view('tutor.profil');
-            case 'sage':
-                $page = session('page');
-                return view($page.'.profil');
-        }
-    }
-
-    public function editDisponibilite(Request $request): View
+    public function editDisponibilite(Request $request)
     {
 
         $user = $request->user();
@@ -140,6 +142,36 @@ class ProfileController extends Controller
         $user->image = $fileNameToStore;
         $user->update();
         return redirect("/editCompetences");
+    }
+    public function ajouterParcours(Request $request){
+        $this->validate($request, ['ecole'=>'required',
+                                   'diplome'=>'required',
+                                   'annee'=>'required']);
+        $parcours = new ParcoursAcademique();
+        $parcours->ecole=$request->input('ecole');
+        $parcours->diplome=$request->input('diplome');
+        $parcours->annee=$request->input('annee');
+        $parcours->user_id=$request->user()->id;
+        $parcours->save();
+        return redirect('/editParcours');
+    }
+    public function modifierParcours(Request $request){
+        $this->validate($request, ['ecole'=>'required',
+                                   'diplome'=>'required',
+                                   'annee'=>'required']);
+        $parcours = ParcoursAcademique::find($request->input('parcoursId'));
+        $parcours->ecole=$request->input('ecole');
+        $parcours->diplome=$request->input('diplome');
+        $parcours->annee=$request->input('annee');
+        $parcours->user_id=$request->user()->id;
+        $parcours->update();
+        return redirect('/editParcours');
+    }
+
+    public function supprimerParcours($id){
+        $parcours = ParcoursAcademique::find($id);
+        $parcours->delete();
+        return redirect('/editParcours');
     }
 
     /**
