@@ -12,6 +12,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Competence;
 use App\Models\ParcoursProfessionnel;
+use App\Models\Disponibilite;
 use App\Models\User;
 class ProfileController extends Controller
 {
@@ -161,15 +162,47 @@ class ProfileController extends Controller
     {
 
         $user = $request->user();
+        $disponibilites=$user->disponibilites;
         switch ($user->role) {
             case 'etudiant':
-                return view('student.profil');
+                return view('student.profil')->with('disponibilites',$disponibilites);
             case 'tuteur':
-                return view('tutor.profil');
+                return view('tutor.profil')->with('disponibilites',$disponibilites);
             case 'sage':
                 $page = session('page');
-                return view($page.'.profil');
+                return view($page.'.profil')->with('disponibilites',$disponibilites);
         }
+    }
+
+    public function ajouterDisponibilite(Request $request){
+        $this->validate($request, ['date'=>'required|date',
+                                   'heure_debut'=>'required',
+                                   'heure_fin'=>'required']);
+        $disponibilite = new Disponibilite();
+        $disponibilite->date=$request->input('date');
+        $disponibilite->heure_debut=$request->input('heure_debut');
+        $disponibilite->heure_fin=$request->input('heure_fin');
+        $disponibilite->user_id=$request->user()->id;
+        $disponibilite->save();
+        return redirect('/editDisponibilite');
+    }
+    public function modifierDisponibilite(Request $request){
+        $this->validate($request, ['date'=>'required',
+                                   'heure_debut'=>'required',
+                                   'heure_fin'=>'required']);
+        $disponibilite = Disponibilite::find($request->input('disponibiliteId'));
+        $disponibilite->date=$request->input('date');
+        $disponibilite->heure_debut=$request->input('heure_debut');
+        $disponibilite->heure_fin=$request->input('heure_fin');
+        $disponibilite->user_id=$request->user()->id;
+        $disponibilite->update();
+        return redirect('/editDisponibilite');
+    }
+
+    public function supprimerDisponibilite($id){
+        $disponibilite = Disponibilite::find($id);
+        $disponibilite->delete();
+        return redirect('/editDisponibilite');
     }
 
 
