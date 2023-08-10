@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Competence;
+use App\Models\ParcoursProfessionnel;
 use App\Models\User;
 class ProfileController extends Controller
 {
@@ -77,19 +78,83 @@ class ProfileController extends Controller
                 return view($page.'.profil')->with('parcoursAcademiques', $parcoursAcademiques);
         }
     }
+    public function ajouterParcours(Request $request){
+        $this->validate($request, ['ecole'=>'required',
+                                   'diplome'=>'required',
+                                   'annee'=>'required']);
+        $parcours = new ParcoursAcademique();
+        $parcours->ecole=$request->input('ecole');
+        $parcours->diplome=$request->input('diplome');
+        $parcours->annee=$request->input('annee');
+        $parcours->user_id=$request->user()->id;
+        $parcours->save();
+        return redirect('/editParcours');
+    }
+    public function modifierParcours(Request $request){
+        $this->validate($request, ['ecole'=>'required',
+                                   'diplome'=>'required',
+                                   'annee'=>'required']);
+        $parcours = ParcoursAcademique::find($request->input('parcoursId'));
+        $parcours->ecole=$request->input('ecole');
+        $parcours->diplome=$request->input('diplome');
+        $parcours->annee=$request->input('annee');
+        $parcours->user_id=$request->user()->id;
+        $parcours->update();
+        return redirect('/editParcours');
+    }
+
+    public function supprimerParcours($id){
+        $parcours = ParcoursAcademique::find($id);
+        $parcours->delete();
+        return redirect('/editParcours');
+    }
     public function editParcourspro(Request $request)
     {
 
         $user = $request->user();
+        $parcoursProfessionnels = $user->parcoursProfessionnels;
         switch ($user->role) {
             case 'etudiant':
-                return view('student.profil');
+                return view('student.profil')->with('parcoursProfessionnels', $parcoursProfessionnels);
             case 'tuteur':
-                return view('tutor.profil');
+                return view('tutor.profil')->with('parcoursProfessionnels', $parcoursProfessionnels);
             case 'sage':
                 $page = session('page');
-                return view($page.'.profil');
+                return view($page.'.profil')->with('parcoursProfessionnels', $parcoursProfessionnels);
         }
+    }
+    public function ajouterParcoursPro(Request $request){
+        $this->validate($request, ['entreprise'=>'required',
+                                   'poste'=>'required',
+                                   'date_debut'=>'required',
+                                   'date_fin'=>'nullable']);
+        $parcours = new ParcoursProfessionnel();
+        $parcours->entreprise=$request->input('entreprise');
+        $parcours->poste=$request->input('poste');
+        $parcours->date_debut=$request->input('date_debut');
+        $parcours->date_fin=$request->input('date_fin');
+        $parcours->user_id=$request->user()->id;
+        $parcours->save();
+        return redirect('/editParcourspro');
+    }
+    public function modifierParcoursPro(Request $request){
+        $this->validate($request, ['entreprise'=>'required',
+                                   'poste'=>'required',
+                                   'date_debut'=>'required',
+                                   'date_fin'=>'nullable']);
+        $parcours = ParcoursProfessionnel::find($request->input('parcoursId'));
+        $parcours->entreprise=$request->input('entreprise');
+        $parcours->poste=$request->input('poste');
+        $parcours->date_debut=$request->input('date_debut');
+        $parcours->date_fin=$request->input('date_fin');
+        $parcours->user_id=$request->user()->id;
+        $parcours->save();
+        return redirect('/editParcourspro');
+    }
+    public function supprimerParcoursPro($id){
+        $parcours = ParcoursProfessionnel::find($id);
+        $parcours->delete();
+        return redirect('/editParcourspro');
     }
 
     public function editDisponibilite(Request $request)
@@ -143,37 +208,6 @@ class ProfileController extends Controller
         $user->update();
         return redirect("/editCompetences");
     }
-    public function ajouterParcours(Request $request){
-        $this->validate($request, ['ecole'=>'required',
-                                   'diplome'=>'required',
-                                   'annee'=>'required']);
-        $parcours = new ParcoursAcademique();
-        $parcours->ecole=$request->input('ecole');
-        $parcours->diplome=$request->input('diplome');
-        $parcours->annee=$request->input('annee');
-        $parcours->user_id=$request->user()->id;
-        $parcours->save();
-        return redirect('/editParcours');
-    }
-    public function modifierParcours(Request $request){
-        $this->validate($request, ['ecole'=>'required',
-                                   'diplome'=>'required',
-                                   'annee'=>'required']);
-        $parcours = ParcoursAcademique::find($request->input('parcoursId'));
-        $parcours->ecole=$request->input('ecole');
-        $parcours->diplome=$request->input('diplome');
-        $parcours->annee=$request->input('annee');
-        $parcours->user_id=$request->user()->id;
-        $parcours->update();
-        return redirect('/editParcours');
-    }
-
-    public function supprimerParcours($id){
-        $parcours = ParcoursAcademique::find($id);
-        $parcours->delete();
-        return redirect('/editParcours');
-    }
-
     /**
      * Delete the user's account.
      */

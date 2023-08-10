@@ -68,6 +68,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/ajouterParcours', [ProfileController::class, 'ajouterParcours'])->name('ajouterParcours');
 
     Route::get('/editParcourspro', [ProfileController::class, 'editParcourspro'])->name('editParcourspro');
+    Route::post('/editParcourspro', [ProfileController::class, 'modifierParcoursPro'])->name('modifierParcoursPro');
+    Route::delete('/editParcourspro/{id}', [ProfileController::class, 'supprimerParcoursPro'])->name('deleteParcoursPro');
+    Route::post('/ajouterParcoursPro', [ProfileController::class, 'ajouterParcoursPro'])->name('ajouterParcoursPro');
+
     Route::get('/editDisponibilite', [ProfileController::class, 'editDisponibilite'])->name('editDisponibilite');
 
 });

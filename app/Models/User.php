@@ -55,4 +55,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(ParcoursAcademique::class);
     }
+    public function parcoursProfessionnels(): HasMany
+    {
+        return $this->hasMany(ParcoursProfessionnel::class);
+    }
 }

@@ -1,15 +1,3 @@
-{{-- @if (count($parcoursAcademiques)>0)
-<ul>
-    @foreach ($parcoursAcademiques as parcoursAcademique)
-        <li>{{$parcour}}</li>
-    @endforeach
-</ul>
-@else
-    <p class="my-3">Vous n'avez ajouté aucune compétence pour le moment!</p>
-@endif --}}
-
-<!-- Modal toggle -->
-
 <section class="p-3 sm:p-5">
                 @if (count($parcoursAcademiques)>0)
             <div class="relative shadow-md sm:rounded-lg">

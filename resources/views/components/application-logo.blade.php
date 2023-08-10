@@ -51,5 +51,5 @@
     </g>
     <g id="Texts" transform="translate(-112.12389,-128.97345)">
 
-    <text xml:space="preserve" id="text408" style="white-space:pre;shape-inside:url(#rect410);display:inline;fill:#f3ca20;stroke-width:0.6;stroke-linejoin:round;stroke-opacity:0.403846" transform="matrix(2.1360011,0,0,3.2425735,-223.49628,-682.24792)"><tspan x="164.60156" y="305.71129" id="tspan3270"><tspan style="font-size:18.2388px;font-family:'Bradley Hand ITC';-inkscape-font-specification:'Bradley Hand ITC, Normal';fill:#00ff00" id="tspan3268">TutorConnect</tspan></tspan></text></g>
+    <text xml:space="preserve" id="text408" style="white-space:pre;shape-inside:url(#rect410);display:inline;fill:#f3ca20;stroke-width:0.6;stroke-linejoin:round;stroke-opacity:0.403846" transform="matrix(2.1360011,0,0,3.2425735,-223.49628,-682.24792)"><tspan x="164.60156" y="305.71129" id="tspan3270"><tspan class="text-blue-800" style="font-size:18.2388px;font-family:'Bradley Hand ITC';-inkscape-font-specification:'Bradley Hand ITC, Normal';fill:currentColor" id="tspan3268">TutorConnect</tspan></tspan></text></g>
 </svg>
