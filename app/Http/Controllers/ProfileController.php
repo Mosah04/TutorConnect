@@ -202,7 +202,7 @@ class ProfileController extends Controller
         $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
         $extension = $request->file('userImage')->getClientOriginalExtension();
         $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-        if($user->image!=null)Storage::delete('public/usersImages/'.$user->image);
+        if($user->image!='userProfile.png')Storage::delete('public/usersImages/'.$user->image);
         $path = $request->file('userImage')->storeAs('public/usersImages', $fileNameToStore);
         $user->image = $fileNameToStore;
         $user->update();

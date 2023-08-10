@@ -1,84 +1,26 @@
 @extends('layouts.student')
 @section('main')
 
-<div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
-    <div class="mx-auto mb-8 max-w-screen-sm lg:mb-16">
-        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Nos tuteurs</h2>
-        <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">TutorConnect vous présente une liste complète de tuteurs prêts à vous aider </p>
+<div class="py-8 px-4 text-center">
+    <div class="mb-8 bg-green-300 py-2">
+        <h2 class="mb-2 text-4xl tracking-tight font-bold text-gray-900 dark:text-white">Trouvez des tuteurs</h2>
+        <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">TutorConnect vous présente une liste de tuteurs prêts à vous aider </p>
     </div>
-    <div class="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        <div class="text-center text-gray-500 dark:text-gray-400">
-            <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
+    @if ($tuteurs)
+    <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+        @foreach ($tuteurs as $tuteur)
+        <div class="text-center text-gray-500 dark:text-gray-400 p-3 rounded-lg hover:bg-white hover:shadow-lg hover:shadow-gray-800 transition-hover duration-500 ease-out border border-gray-500">
+            <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('storage/usersImages/'.$tuteur->image)}}" alt="Image du tuteur">
             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                <a href="#">NOM DU TUTEUR</a>
+                <a href="#">{{$tuteur->name}}</a>
             </h3>
-            <p>SPACIALITE DU TUTEUR</p>
-            <p>NOTE SUR LE TUTEUR</p>
+            <p>Spécialité du tuteur</p>
+            <p>Note</p>
         </div>
-
-        <div class="text-center text-gray-500 dark:text-gray-400">
-          <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
-          <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              <a href="#">NOM DU TUTEUR</a>
-          </h3>
-          <p>SPACIALITE DU TUTEUR</p>
-          <p>NOTE SUR LE TUTEUR</p>
-      </div>
-
-      <div class="text-center text-gray-500 dark:text-gray-400">
-          <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
-          <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              <a href="#">NOM DU TUTEUR</a>
-          </h3>
-          <p>SPACIALITE DU TUTEUR</p>
-          <p>NOTE SUR LE TUTEUR</p>
-      </div>
-
-      <div class="text-center text-gray-500 dark:text-gray-400">
-          <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
-          <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              <a href="#">NOM DU TUTEUR</a>
-          </h3>
-          <p>SPACIALITE DU TUTEUR</p>
-          <p>NOTE SUR LE TUTEUR</p>
-      </div>
-
-      <div class="text-center text-gray-500 dark:text-gray-400">
-          <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
-          <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              <a href="#">NOM DU TUTEUR</a>
-          </h3>
-          <p>SPACIALITE DU TUTEUR</p>
-          <p>NOTE SUR LE TUTEUR</p>
-      </div>
-
-      <div class="text-center text-gray-500 dark:text-gray-400">
-          <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
-          <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              <a href="#">NOM DU TUTEUR</a>
-          </h3>
-          <p>SPACIALITE DU TUTEUR</p>
-          <p>NOTE SUR LE TUTEUR</p>
-      </div>
-
-      <div class="text-center text-gray-500 dark:text-gray-400">
-          <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
-          <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              <a href="#">NOM DU TUTEUR</a>
-          </h3>
-          <p>SPACIALITE DU TUTEUR</p>
-          <p>NOTE SUR LE TUTEUR</p>
-      </div>
-
-      <div class="text-center text-gray-500 dark:text-gray-400">
-          <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Avatar">
-          <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              <a href="#">NOM DU TUTEUR</a>
-          </h3>
-          <p>SPACIALITE DU TUTEUR</p>
-          <p>NOTE SUR LE TUTEUR</p>
-      </div>
+        @endforeach
     </div>
+    @endif
+
 </div>
 @endsection
 

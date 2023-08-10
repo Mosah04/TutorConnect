@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -77,17 +78,18 @@ class PagesController extends Controller
 
     }
     public function tuteurs (){
+        $tuteurs = User::where('role', 'tuteur')->orWhere('role', 'sage')->get();
         $user = Auth::user();
         switch ($user->role) {
             case 'etudiant':
-                return view('student.tuteurs');
+                return view('student.tuteurs')->with('tuteurs', $tuteurs);
             case 'tuteur':
                 abort(404);
             case 'sage':
                 $page = session('page');
                 if($page==="tutor")
                     abort(404);
-                return view($page.'.tuteurs');
+                return view($page.'.tuteurs')->with('tuteurs', $tuteurs);
         }
 
     }
