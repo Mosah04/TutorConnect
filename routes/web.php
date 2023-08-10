@@ -73,6 +73,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/ajouterParcoursPro', [ProfileController::class, 'ajouterParcoursPro'])->name('ajouterParcoursPro');
 
     Route::get('/editDisponibilite', [ProfileController::class, 'editDisponibilite'])->name('editDisponibilite');
+    Route::post('/editDisponibilite', [ProfileController::class, 'modifierDisponibilite'])->name('modifierDisponibilite');
+    Route::delete('/editDisponibilite/{id}', [ProfileController::class, 'supprimerDisponibilite'])->name('deleteDisponibilite');
+    Route::post('/ajouterDisponibilite', [ProfileController::class, 'ajouterDisponibilite'])->name('ajouterDisponibilite');
 
 });
 
