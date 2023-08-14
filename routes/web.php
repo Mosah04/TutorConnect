@@ -40,6 +40,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mesCours', [PagesController::class, 'mesCours'])->name('mesCours');
     Route::get('/mesBlogs', [PagesController::class, 'mesBlogs'])->name('mesBlogs');
 
+    Route::get('/user/{id}', [ProfileController::class, 'afficherProfil'])->name('afficherProfil');
+
 });
 
 

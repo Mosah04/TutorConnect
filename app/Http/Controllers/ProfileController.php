@@ -34,6 +34,22 @@ class ProfileController extends Controller
         }
     }
 
+    public function afficherProfil(Request $request, $id)
+    {
+
+        $user = $request->user();
+        $userToView = User::find($id);
+        switch ($user->role) {
+            case 'etudiant':
+                return view('profile.afficher')->with('page','student')->with('userToView',$userToView);
+            case 'tuteur':
+                return view('profile.afficher')->with('page', 'tutor')->with('userToView',$userToView);
+            case 'sage':
+                $page = session('page');
+                return view('profile.afficher')->with('page', $page)->with('userToView',$userToView);
+        }
+    }
+
     /**
      * Update the user's profile information.
      */

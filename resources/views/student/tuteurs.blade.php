@@ -12,7 +12,7 @@
         <div class="text-center text-gray-500 dark:text-gray-400 p-3 rounded-lg hover:bg-white hover:shadow-lg hover:shadow-gray-800 transition-hover duration-500 ease-out border border-gray-500">
             <img class="mx-auto mb-4 w-36 h-36 rounded-full" src="{{asset('storage/usersImages/'.$tuteur->image)}}" alt="Image du tuteur">
             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                <a href="#">{{$tuteur->name}}</a>
+                <a href="{{url('/user/'.$tuteur->id)}}">{{$tuteur->name}}</a>
             </h3>
             <p>{{$tuteur->specialite->nom??""}}</p>
             <p>Note</p>
