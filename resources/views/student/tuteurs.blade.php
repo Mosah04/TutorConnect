@@ -14,7 +14,7 @@
             <h3 class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 <a href="#">{{$tuteur->name}}</a>
             </h3>
-            <p>Spécialité du tuteur</p>
+            <p>{{$tuteur->specialite->nom??""}}</p>
             <p>Note</p>
         </div>
         @endforeach

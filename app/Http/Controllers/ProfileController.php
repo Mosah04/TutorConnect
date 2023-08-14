@@ -44,7 +44,8 @@ class ProfileController extends Controller
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
-
+        if($request->input('specialite'))
+        $request->user()->specialite()->updateOrCreate(['user_id'=>$request->user()->id],['nom'=>$request->input('specialite')]);
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
@@ -125,10 +126,10 @@ class ProfileController extends Controller
         }
     }
     public function ajouterParcoursPro(Request $request){
-        $this->validate($request, ['entreprise'=>'required',
-                                   'poste'=>'required',
-                                   'date_debut'=>'required',
-                                   'date_fin'=>'nullable']);
+        $this->validate($request, ['entreprise'=>'required|string',
+                                   'poste'=>'required|string',
+                                   'date_debut'=>'required|date',
+                                   'date_fin'=>'nullable|date']);
         $parcours = new ParcoursProfessionnel();
         $parcours->entreprise=$request->input('entreprise');
         $parcours->poste=$request->input('poste');
@@ -141,8 +142,8 @@ class ProfileController extends Controller
     public function modifierParcoursPro(Request $request){
         $this->validate($request, ['entreprise'=>'required',
                                    'poste'=>'required',
-                                   'date_debut'=>'required',
-                                   'date_fin'=>'nullable']);
+                                   'date_debut'=>'required|date',
+                                   'date_fin'=>'nullable|date']);
         $parcours = ParcoursProfessionnel::find($request->input('parcoursId'));
         $parcours->entreprise=$request->input('entreprise');
         $parcours->poste=$request->input('poste');
@@ -187,7 +188,7 @@ class ProfileController extends Controller
         return redirect('/editDisponibilite');
     }
     public function modifierDisponibilite(Request $request){
-        $this->validate($request, ['date'=>'required',
+        $this->validate($request, ['date'=>'required|date',
                                    'heure_debut'=>'required',
                                    'heure_fin'=>'required']);
         $disponibilite = Disponibilite::find($request->input('disponibiliteId'));
@@ -253,6 +254,12 @@ class ProfileController extends Controller
         $user = $request->user();
 
         Auth::logout();
+
+        if($user->competences)$user->competences()->detach();
+        if($user->disponibilites)$user->disponibilites()->delete();
+        if($user->specialite)$user->specialite()->delete();
+        if($user->parcoursProfessionnels)$user->parcoursProfessionnels()->delete();
+        if($user->parcoursAcademiques)$user->parcoursAcademiques()->delete();
 
         $user->delete();
 

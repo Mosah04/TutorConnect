@@ -47,6 +47,12 @@
             @endif
         </div>
 
+        <div>
+            <x-input-label for="specialite" :value="__('Spécialité')" />
+            <x-text-input id="specialite" name="specialite" type="text" class="mt-1 block w-full" :value="old('specialite', $user->specialite->nom??'')" autofocus autocomplete="specialite" />
+            <x-input-error class="mt-2" :messages="$errors->get('specialite')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Enregistrer') }}</x-primary-button>
 

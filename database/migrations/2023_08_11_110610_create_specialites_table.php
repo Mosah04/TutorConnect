@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('competence_user', function (Blueprint $table) {
+        Schema::create('specialites', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('competence_id');
-
+            $table->string('nom');
+            $table->string('user_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('competence_id')->references('id')->on('competences');
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('competence_user');
+        Schema::dropIfExists('specialites');
     }
 };
