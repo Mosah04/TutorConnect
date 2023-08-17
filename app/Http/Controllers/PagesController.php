@@ -112,15 +112,24 @@ class PagesController extends Controller
     public function viewFoundTutor ($cr, $val){
         switch ($cr) {
             case 'specialite':
-                $tuteurs=User::whereHas('specialite', function ($query) use($val) {
+                $tuteurs=User::where(function($requete){
+                    $requete->where('role', 'tuteur')
+                            ->orWhere('role', 'sage');
+                })->whereHas('specialite', function ($query) use($val) {
                     $query->where('nom', 'like', '%'.$val.'%');
-                })->get();
+                })->where('role', 'tuteur')->orWhere('role', 'sage')->get();
                 break;
             case 'competence':
-                $tuteurs=Competence::find($val)?Competence::find($val)->users()->get():null;
+                $tuteurs=Competence::find($val)?Competence::find($val)->users()->where(function($requete){
+                    $requete->where('role', 'tuteur')
+                            ->orWhere('role', 'sage');
+                })->get():null;
                 break;
             case 'niveau':
-                $tuteurs=User::whereHas('parcoursAcademiques', function ($query) use($val) {
+                $tuteurs=User::where(function($requete){
+                    $requete->where('role', 'tuteur')
+                            ->orWhere('role', 'sage');
+                })->whereHas('parcoursAcademiques', function ($query) use($val) {
                     $query->where('diplome', 'like', '%'.$val.'%');
                 })->get();
                 break;
