@@ -34,17 +34,18 @@ class PagesController extends Controller
     }
  }
     public function home(){
+        $tuteurs = User::where('role', 'tuteur')->orWhere('role', 'sage')->get();
         $user = Auth::user();
         switch ($user->role) {
             case 'etudiant':
-                return view('student.home');
+                return view('student.home')->with('tuteurs', $tuteurs);
             case 'admin':
                 return view('layouts.admin');
             case 'tuteur':
-                return view('tutor.home');
+                return view('tutor.home')->with('tuteurs', $tuteurs);
             case 'sage':
                 $page = session('page');
-                return view($page.'.home');
+                return view($page.'.home')->with('tuteurs', $tuteurs);
         }
     }
 
