@@ -53,6 +53,12 @@
             <x-input-error class="mt-2" :messages="$errors->get('specialite')" />
         </div>
 
+        <div>
+            <x-input-label for="bio" :value="__('Décrivez-vous')" />
+            <textarea name="bio" cols="30" rows="5" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full">{{old('bio', $user->bio->description??'')}}</textarea>
+            <x-input-error class="mt-2" :messages="$errors->get('bio')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Enregistrer') }}</x-primary-button>
 

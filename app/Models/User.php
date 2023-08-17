@@ -68,4 +68,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Specialite::class);
     }
+    public function bio(): HasOne
+    {
+        return $this->hasOne(Bio::class);
+    }
 }

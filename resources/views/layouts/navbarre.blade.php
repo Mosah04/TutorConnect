@@ -13,7 +13,7 @@
             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">TutorConnect</span>
           </a>
         </div>
-        <div  class="font-bold text-xl">
+        <div  class="font-bold text-xl lg:visible invisible">
             {{$slot}}
        </div>
         <div class="flex items-center">

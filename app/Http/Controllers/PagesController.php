@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Competence;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,16 +81,64 @@ class PagesController extends Controller
     public function tuteurs (){
         $tuteurs = User::where('role', 'tuteur')->orWhere('role', 'sage')->get();
         $user = Auth::user();
+        $competences = Competence::orderBy('nom', 'asc')->get();
         switch ($user->role) {
             case 'etudiant':
-                return view('student.tuteurs')->with('tuteurs', $tuteurs);
+                return view('student.tuteurs')->with('tuteurs', $tuteurs)->with('competences', $competences);
             case 'tuteur':
                 abort(404);
             case 'sage':
+                if(session('page')==="tutor")
+                    session()->put('page', 'student');
                 $page = session('page');
-                if($page==="tutor")
-                    abort(404);
-                return view($page.'.tuteurs')->with('tuteurs', $tuteurs);
+                return view($page.'.tuteurs')->with('tuteurs', $tuteurs)->with('competences', $competences);
+        }
+
+    }
+
+    public function searchTutor (Request $request){
+        $this->validate($request, ['search_criteria'=>'required|string']);
+        if($request->input('search_criteria')!=='competence'){
+            $this->validate($request, ['search_bar'=>'required|string']);
+            $val=$request->input('search_bar');
+        }else{
+            $this->validate($request, ['competences'=>'required']);
+            $val=$request->input('competences');
+        }
+        return redirect('/searchTutor/cr='.$request->input('search_criteria').'&val='.$val);
+    }
+
+    public function viewFoundTutor ($cr, $val){
+        switch ($cr) {
+            case 'specialite':
+                $tuteurs=User::whereHas('specialite', function ($query) use($val) {
+                    $query->where('nom', 'like', '%'.$val.'%');
+                })->get();
+                break;
+            case 'competence':
+                $tuteurs=Competence::find($val)?Competence::find($val)->users()->get():null;
+                break;
+            case 'niveau':
+                $tuteurs=User::whereHas('parcoursAcademiques', function ($query) use($val) {
+                    $query->where('diplome', 'like', '%'.$val.'%');
+                })->get();
+                break;
+            default:
+                $tuteurs=null;
+                break;
+        }
+        $user = Auth::user();
+        $competences = Competence::orderBy('nom', 'asc')->get();
+        switch ($user->role) {
+            case 'etudiant':
+                return view('student.tuteurs')->with('tuteurs', $tuteurs)->with('competences', $competences);
+            case 'tuteur':
+                abort(404);
+            case 'sage':
+                if(session('page')==="tutor")
+                    session()->put('page', 'student');
+                $page = session('page');
+                return view($page.'.tuteurs')->with('tuteurs', $tuteurs)->with('competences', $competences);
         }
 
     }

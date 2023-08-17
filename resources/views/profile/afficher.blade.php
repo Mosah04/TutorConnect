@@ -7,12 +7,12 @@
         </div>
         <div class="flex lg:flex-row flex-col">
             <div class="bg-white inline-block lg:rounded-full p-1 lg:ml-10 lg:-translate-y-1/2 flex-shrink-0">
-                <img class="m-auto rounded-full h-30 w-30" src="{{asset('img/profile-picture-5.jpg')}}" alt="">
+                <img class="m-auto rounded-full h-40" src="{{asset('storage/usersImages/'.$userToView->image)}}" alt="">
             </div>
             <div class="mt-4 w-full lg:pl-5 lg:pr-10">
                 <div class="flex lg:flex-row flex-col lg:justify-between justify-center w-full lg:text-left text-center">
                     <div class="lg:inline-block text-3xl font-bold lg:pt-3 lg:w-[60%]">
-                        ZAKARI
+                        {{$userToView->name}}
                     </div>
                     <button class="text-sm mt-2 py-3 rounded-md border border-gray-300 hover:bg-gray-100 lg:w-[40%] flex-shrink lg:mb-0 mb-3">
                         Contacter
@@ -25,59 +25,52 @@
     </header>
     <section class="flex lg:flex-row flex-col py-8 space-y-2">
         <aside class="space-y-2 lg:space-y-4 pr-4 mx-auto lg:w-[35%]">
+            @if ($bio=$userToView->bio)
             <div  onclick='document.getElementById("bio").classList.toggle("truncate")' class=" flex flex-col cursor-pointer p-5 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
                 <h3 class="mb-2 font-semibold text-left">Bio</h3>
-                <p id="bio" class="text-left truncate">“Je suis conceptrice-rédactrice en communication depuis 4 ans. Grâce à mon expertise dans le domaine de la communication je sais jouer des mots, faire preuve d’une qualité d’écoute et des attentes souhaitées.
-                    La rigueur est ma devise. J’aime ce que je fais, mon intuition et ma créativité ont pour but de faire ressortir le meilleur de vous.</p>
-                </div>
+                <p id="bio" class="text-left truncate">“{{$bio->description}}</p>
+            </div>
+            @endif
+
+            @if ($competences=$userToView->competences)
             <div class="flex flex-col p-3 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
                 <h3 class="font-semibold text-left">Compétences</h3>
                 <ul class="pl-2 text-left list-disc list-inside">
-                    <li>Développement web</li>
-                    <li>Développement web</li>
-                    <li>Développement web</li>
+                    @foreach ($competences as $competence)
+                    <li>{{$competence->nom}}</li>
+                    @endforeach
                 </ul>
             </div>
+            @endif
+            @if ($parcoursAcademiques=$userToView->parcoursAcademiques)
             <div class="flex flex-col p-3 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
                 <h3 class="font-semibold text-left">Parcours académique</h3>
                 <ul class="pl-2 text-left">
+                    @foreach ($parcoursAcademiques as $parcoursAcademique)
                     <li class="flex flex-col pb-3">
-                        <span class="border-l-2 border-green-400 pl-3 font-bold">Université XYZ</span>
-                        <span class="pl-4 italic">Licence en Informatique</span>
-                        <span class="pl-4 text-gray-400">(2015 - 2019)</span>
+                        <span class="border-l-2 border-green-400 pl-3 font-bold">{{$parcoursAcademique->ecole}}</span>
+                        <span class="pl-4 italic">{{$parcoursAcademique->diplome}}</span>
+                        <span class="pl-4 text-gray-400">({{$parcoursAcademique->annee}})</span>
                     </li>
-                    <li class="flex flex-col pb-3">
-                        <span class="border-l-2 border-green-400 pl-3 font-bold">Université XYZ</span>
-                        <span class="pl-4 italic">Licence en Informatique</span>
-                        <span class="pl-4 text-gray-400">(2015 - 2019)</span>
-                    </li>
-                    <li class="flex flex-col pb-3">
-                        <span class="border-l-2 border-green-400 pl-3 font-bold">Université XYZ</span>
-                        <span class="pl-4 italic">Licence en Informatique</span>
-                        <span class="pl-4 text-gray-400">(2015 - 2019)</span>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
+            @endif
+            @if ($parcoursProfessionnels=$userToView->parcoursProfessionnels)
             <div class="flex flex-col p-3 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
                 <h3 class="font-semibold text-left">Parcours professionnel</h3>
                 <ul class="pl-2 text-left">
+                    @foreach ($parcoursProfessionnels as $parcoursProfessionnel)
                     <li class="flex flex-col pb-3">
-                        <span class="border-l-2 border-green-400 pl-3 font-bold">MA-INFO</span>
-                        <span class="pl-4 italic">Stagiaire</span>
-                        <span class="pl-4 text-gray-400">Août 2019 à Septembre 2019</span>
+                        <span class="border-l-2 border-green-400 pl-3 font-bold">{{$parcoursProfessionnel->entreprise}}</span>
+                        <span class="pl-4 italic">{{$parcoursProfessionnel->poste}}</span>
+                        <span class="pl-4 text-gray-400">{{ucfirst($parcoursProfessionnel->date_debut->translatedFormat('F Y','fr'))}} à {{$parcoursProfessionnel->date_fin?ucFirst($parcoursProfessionnel->date_fin->translatedFormat('F Y','fr')):'maintenant'}}</span>
                     </li>
-                    <li class="flex flex-col pb-3">
-                        <span class="border-l-2 border-green-400 pl-3 font-bold">TEC-SARL</span>
-                        <span class="pl-4 italic">Stagiaire</span>
-                        <span class="pl-4 text-gray-400">Janvier 1943 à Octobre 1943</span>
-                    </li>
-                    <li class="flex flex-col pb-3">
-                        <span class="border-l-2 border-green-400 pl-3 font-bold">Art Creativity</span>
-                        <span class="pl-4 italic">Stagiaire</span>
-                        <span class="pl-4 text-gray-400">Décembre 2015 à Janvier 2019</span>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
+            @endif
+
             <div class="flex flex-col p-3 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
                 <h3 class="font-semibold text-left">Statistiques tuteur</h3>
                 <ul class="sellerStats">
@@ -114,8 +107,8 @@
                                 <div class="flex flex-row">
                                     <img src="https://img-c.udemycdn.com/course/240x135/4045058_f063.jpg" class="rounded-full h-10 w-10" alt="">
                                     <div class="pl-3">
-                                        <p class="text-left"><span class="text-gray-400">par</span> ZAKARI</p>
                                         <div class="">
+                                            <p class="text-left"><span class="text-gray-400">par</span> {{$userToView->name}}</p>
                                             <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
                                             <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
                                             <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
@@ -137,8 +130,8 @@
                                 <div class="flex flex-row">
                                     <img src="https://img-c.udemycdn.com/course/240x135/4045058_f063.jpg" class="rounded-full h-10 w-10" alt="">
                                     <div class="pl-3">
-                                        <p class="text-left"><span class="text-gray-400">par</span> ZAKARI</p>
                                         <div class="">
+                                            <p class="text-left"><span class="text-gray-400">par</span> {{$userToView->name}}</p>
                                             <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
                                             <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
                                             <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
@@ -160,8 +153,8 @@
                                 <div class="flex flex-row">
                                     <img src="https://img-c.udemycdn.com/course/240x135/4045058_f063.jpg" class="rounded-full h-10 w-10" alt="">
                                     <div class="pl-3">
-                                        <p class="text-left"><span class="text-gray-400">par</span> ZAKARI</p>
                                         <div class="">
+                                            <p class="text-left"><span class="text-gray-400">par</span> {{$userToView->name}}</p>
                                             <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
                                             <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
                                             <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">

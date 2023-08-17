@@ -39,14 +39,18 @@ class ProfileController extends Controller
 
         $user = $request->user();
         $userToView = User::find($id);
-        switch ($user->role) {
-            case 'etudiant':
-                return view('profile.afficher')->with('page','student')->with('userToView',$userToView);
-            case 'tuteur':
-                return view('profile.afficher')->with('page', 'tutor')->with('userToView',$userToView);
-            case 'sage':
-                $page = session('page');
-                return view('profile.afficher')->with('page', $page)->with('userToView',$userToView);
+        if($userToView){
+            switch ($user->role) {
+                case 'etudiant':
+                    return view('profile.afficher')->with('page','student')->with('userToView',$userToView);
+                case 'tuteur':
+                    return view('profile.afficher')->with('page', 'tutor')->with('userToView',$userToView);
+                case 'sage':
+                    $page = session('page');
+                    return view('profile.afficher')->with('page', $page)->with('userToView',$userToView);
+            }
+        }else{
+            abort('404');
         }
     }
 
@@ -62,6 +66,8 @@ class ProfileController extends Controller
         }
         if($request->input('specialite'))
         $request->user()->specialite()->updateOrCreate(['user_id'=>$request->user()->id],['nom'=>$request->input('specialite')]);
+        if($request->input('bio'))
+        $request->user()->bio()->updateOrCreate(['user_id'=>$request->user()->id],['description'=>$request->input('bio')]);
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');

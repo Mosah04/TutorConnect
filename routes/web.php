@@ -40,6 +40,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mesCours', [PagesController::class, 'mesCours'])->name('mesCours');
     Route::get('/mesBlogs', [PagesController::class, 'mesBlogs'])->name('mesBlogs');
 
+    Route::get('/searchTutor/cr={cr}&val={val}', [PagesController::class, 'viewFoundTutor'])->name('viewFoundTutor');
+    Route::post('/searchTutor', [PagesController::class, 'searchTutor'])->name('searchTutor');
+
     Route::get('/user/{id}', [ProfileController::class, 'afficherProfil'])->name('afficherProfil');
 
 });
