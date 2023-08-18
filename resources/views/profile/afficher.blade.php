@@ -7,7 +7,7 @@
         </div>
         <div class="flex lg:flex-row flex-col">
             <div class="bg-white inline-block lg:rounded-full p-1 lg:ml-10 lg:-translate-y-1/2 flex-shrink-0">
-                <img class="m-auto rounded-full h-40" src="{{asset('storage/usersImages/'.$userToView->image)}}" alt="">
+                <img class="m-auto rounded-full h-40 w-40" src="{{asset('storage/usersImages/'.$userToView->image)}}" alt="">
             </div>
             <div class="mt-4 w-full lg:pl-5 lg:pr-10">
                 <div class="flex lg:flex-row flex-col lg:justify-between justify-center w-full lg:text-left text-center">
