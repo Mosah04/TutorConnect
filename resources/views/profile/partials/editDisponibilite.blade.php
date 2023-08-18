@@ -39,7 +39,7 @@
                                         </li>
                                     </ul>
                                     <div class="py-1">
-                                        <form action="{{route('deleteDisponibilite', $disponibilite->id)}}" class="m-0" method="POST">
+                                        <form action="{{route('deleteDisponibilite',   $disponibilite->id)}}" class="m-0" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Supprimer</button>

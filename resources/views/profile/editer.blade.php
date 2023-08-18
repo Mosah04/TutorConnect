@@ -2,7 +2,7 @@
             <aside class="flex flex-col lg:border-l-2 lg:border-t-2 lg:border-b-2 border-gray-800 lg:w-[30%]">
                 <div class="inline-block flex flex-col">
                     <div class="relative flex flex-col items-center inline-block rounded-full bg-blue-200 p-2 m-auto">
-                        <img id="img" class="w-[8rem] h-[8rem] rounded-full" src="{{asset('storage/usersImages/'.((Auth::user()->image==null)?'userProfile.png':Auth::user()->image))}}" alt="Rounded avatar">
+                        <img id="img" class="w-[8rem] h-[8rem] rounded-full" src="{{asset('storage/usersImages/'.Auth::user()->image)}}" alt="Rounded avatar">
                             <button data-modal-target="userImage-modal" data-modal-toggle="userImage-modal" id="selectButton" type="button" class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-gray-300 rounded-full opacity-0 hover:opacity-75">Changer la photo de profil</button>
                             <div id="userImage-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                 <div class="relative w-full max-w-md max-h-full">
