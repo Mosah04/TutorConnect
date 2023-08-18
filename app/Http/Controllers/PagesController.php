@@ -229,16 +229,17 @@ class PagesController extends Controller
 
     public function mesCours (){
         $user = Auth::user();
+        $cours = $user->cours;
         switch ($user->role) {
             case 'tuteur':
-                return view('tutor.mesCours');
+                return view('tutor.mesCours')->with('cours', $cours);
             case 'etudiant':
                 abort(404);
             case 'sage':
                 $page = session('page');
                 if($page==="student")
                     abort(404);
-                return view($page.'.mesCours');
+                return view($page.'.mesCours')->with('cours', $cours);
         }
 
     }

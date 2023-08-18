@@ -72,4 +72,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Bio::class);
     }
+
+    public function cours()
+    {
+        return $this->hasMany(Cours::class);
+    }
+
 }

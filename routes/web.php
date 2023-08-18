@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\CoursController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/editDisponibilite', [ProfileController::class, 'modifierDisponibilite'])->name('modifierDisponibilite');
     Route::delete('/editDisponibilite/{id}', [ProfileController::class, 'supprimerDisponibilite'])->name('deleteDisponibilite');
     Route::post('/ajouterDisponibilite', [ProfileController::class, 'ajouterDisponibilite'])->name('ajouterDisponibilite');
+
+    Route::get('/editcours', [CoursController::class, 'editcours'])->name('editcours');
+    Route::post('/editcours', [CoursController::class, 'modifiercours'])->name('modifiercours');
+    Route::delete('/editcours/{id}', [CoursController::class, 'deletecours'])->name('deletecours');
+    Route::post('/ajoutercours', [CoursController::class, 'ajoutercours'])->name('ajoutercours');
+
+    // Route::post('/changerImage', [ProfileController::class, 'changerImage'])->name('changerImage');
+
 
 });
 
