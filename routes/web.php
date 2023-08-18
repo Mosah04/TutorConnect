@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/searchTutor', [PagesController::class, 'searchTutor'])->name('searchTutor');
 
     Route::get('/user/{id}', [ProfileController::class, 'afficherProfil'])->name('afficherProfil');
+
+    Route::resource('/blog', BlogController::class);
 
 });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Competence;
 use App\Models\User;
+use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -53,14 +54,15 @@ class PagesController extends Controller
     public function blogs(){
 
         $user = Auth::user();
+        $blogs = Blog::all();
         switch ($user->role) {
-            case 'etudiant':
-                return view('student.blogs');
             case 'tuteur':
-                return view('tutor.blogs');
+                return view('tutor.blogs')->with('blogs', $blogs);
+            case 'etudiant':
+                return view('student.blogs')->with('blogs', $blogs);
             case 'sage':
                 $page = session('page');
-                return view($page.'.blogs');
+                return view($page.'.blogs')->with('blogs', $blogs);
         }
 
     }
@@ -245,16 +247,17 @@ class PagesController extends Controller
 
     public function mesBlogs (){
         $user = Auth::user();
+        $blogs = $user->blogs;
         switch ($user->role) {
             case 'tuteur':
-                return view('tutor.mesBlogs');
+                return view('tutor.mesBlogs')->with('blogs', $blogs);
             case 'etudiant':
                 abort(404);
             case 'sage':
                 $page = session('page');
                 if($page==="student")
                     abort(404);
-                return view($page.'.mesBlogs');
+                return view($page.'.mesBlogs')->with('blogs', $blogs);
         }
 
     }
