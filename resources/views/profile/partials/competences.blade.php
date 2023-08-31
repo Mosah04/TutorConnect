@@ -59,7 +59,7 @@
                 <div class="grid grid-cols-2 gap-4">
                     @foreach ($competences as $competence)
                         <div class="flex items-center h-5">
-                            <input id="{{$competence->id}}" name="competences[]" type="checkbox" value="{{$competence->id}}" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800">
+                            <input id="{{$competence->id}}" name="competences[]" type="checkbox" @checked($userCompetences->pluck('id')->contains($competence->id)) value="{{$competence->id}}" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800">
                             <label for="{{$competence->id}}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{$competence->nom}}</label>
                         </div>
                     @endforeach

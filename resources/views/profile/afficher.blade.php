@@ -99,75 +99,35 @@
             <div class="pl-4 mx-auto max-w-screen-xl">
                 <div class="grid lg:grid-cols-2 gap-6 xl:gap-10 grid-cols-1">
                     <!-- Pricing Card -->
-                    <div class="flex flex-col max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                        <a href="#">
-                            <img class="rounded-t-lg w-full" src="https://img-c.udemycdn.com/course/240x135/4045058_f063.jpg" alt="Bonnie Avatar">
-                            <div class="m-2 space-y-3">
-                                <h3 class="font-bold text-lg text-left">Formation en big_data</h3>
-                                <div class="flex flex-row">
-                                    <img src="https://img-c.udemycdn.com/course/240x135/4045058_f063.jpg" class="rounded-full h-10 w-10" alt="">
-                                    <div class="pl-3">
-                                        <div class="">
-                                            <p class="text-left"><span class="text-gray-400">par</span> {{$userToView->name}}</p>
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <span>(20)</span>
+                    @if ($Cours = $userToView->cours)
+                        @foreach ($Cours as $cours)
+                            <div class="flex flex-col max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+                                <a href="#">
+                                    <img class="rounded-t-lg w-full h-40" src="{{asset('storage/coursImages/'.$cours->image)}}" alt="Bonnie Avatar">
+                                    <div class="m-2 space-y-3">
+                                        <h3 class="font-bold text-lg text-left">{{$cours->titre}}</h3>
+                                        <div class="flex flex-row">
+                                            <img src="{{asset('storage/usersImages/'.$userToView->image)}}" class="rounded-full h-10 w-10" alt="">
+                                            <div class="pl-3">
+                                                <div class="">
+                                                    <p class="text-left"><span class="text-gray-400">par</span> {{$userToView->name}}</p>
+                                                    <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
+                                                    <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
+                                                    <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
+                                                    <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
+                                                    <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
+                                                    <span>(20)</span>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <p class="w-full p-3 bg-gray-300 font-bold">{{$cours->tarif}}FCFA</p>
                                     </div>
-                                </div>
-                                <p class="w-full p-3 bg-gray-300 font-bold">$35</p>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    <div class="flex flex-col max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                        <a href="#">
-                            <img class="rounded-t-lg w-full" src="https://img-c.udemycdn.com/course/240x135/4045058_f063.jpg" alt="Bonnie Avatar">
-                            <div class="m-2 space-y-3">
-                                <h3 class="font-bold text-lg text-left">Formation en big_data</h3>
-                                <div class="flex flex-row">
-                                    <img src="https://img-c.udemycdn.com/course/240x135/4045058_f063.jpg" class="rounded-full h-10 w-10" alt="">
-                                    <div class="pl-3">
-                                        <div class="">
-                                            <p class="text-left"><span class="text-gray-400">par</span> {{$userToView->name}}</p>
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <span>(20)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="w-full p-3 bg-gray-300 font-bold">$35</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="flex flex-col max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                        <a href="#">
-                            <img class="rounded-t-lg w-full" src="https://img-c.udemycdn.com/course/240x135/4045058_f063.jpg" alt="Bonnie Avatar">
-                            <div class="m-2 space-y-3">
-                                <h3 class="font-bold text-lg text-left">Formation en big_data</h3>
-                                <div class="flex flex-row">
-                                    <img src="https://img-c.udemycdn.com/course/240x135/4045058_f063.jpg" class="rounded-full h-10 w-10" alt="">
-                                    <div class="pl-3">
-                                        <div class="">
-                                            <p class="text-left"><span class="text-gray-400">par</span> {{$userToView->name}}</p>
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <img src="https://comeup.com/built/frontend/images/icon-star-full.svg" alt="" class="inline-block">
-                                            <span>(20)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="w-full p-3 bg-gray-300 font-bold">$35</p>
-                            </div>
-                        </a>
-                    </div>
+                        @endforeach
+
+                    @endif
+
                 </div>
             </div>
         </article>

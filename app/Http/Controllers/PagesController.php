@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Competence;
 use App\Models\User;
 use App\Models\Blog;
+use App\Models\Cours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -37,17 +38,19 @@ class PagesController extends Controller
  }
     public function home(){
         $tuteurs = User::where('role', 'tuteur')->orWhere('role', 'sage')->get();
+        $cours = Cours::take(6)->get();
+        $blogs = Blog::take(4)->get();
         $user = Auth::user();
         switch ($user->role) {
             case 'etudiant':
-                return view('student.home')->with('tuteurs', $tuteurs);
+                return view('student.home')->with('tuteurs', $tuteurs)->with('Cours', $cours)->with('blogs', $blogs);
             case 'admin':
                 return view('layouts.admin');
             case 'tuteur':
-                return view('tutor.home')->with('tuteurs', $tuteurs);
+                return view('tutor.home')->with('tuteurs', $tuteurs)->with('Cours', $cours)->with('blogs', $blogs);
             case 'sage':
                 $page = session('page');
-                return view($page.'.home')->with('tuteurs', $tuteurs);
+                return view($page.'.home')->with('tuteurs', $tuteurs)->with('Cours', $cours)->with('blogs', $blogs);
         }
     }
 
@@ -68,16 +71,16 @@ class PagesController extends Controller
     }
 
     public function cours(){
-
+        $cours = Cours::all();
         $user = Auth::user();
         switch ($user->role) {
             case 'etudiant':
-                return view('student.cours');
+                return view('student.cours')->with('Cours', $cours);
             case 'tuteur':
-                return view('tutor.cours');
+                return view('tutor.cours')->with('Cours', $cours);
             case 'sage':
                 $page = session('page');
-                return view($page.'.cours');
+                return view($page.'.cours')->with('Cours', $cours);
         }
 
     }
@@ -119,7 +122,7 @@ class PagesController extends Controller
                             ->orWhere('role', 'sage');
                 })->whereHas('specialite', function ($query) use($val) {
                     $query->where('nom', 'like', '%'.$val.'%');
-                })->where('role', 'tuteur')->orWhere('role', 'sage')->get();
+                })->get();
                 break;
             case 'competence':
                 $tuteurs=Competence::find($val)?Competence::find($val)->users()->where(function($requete){

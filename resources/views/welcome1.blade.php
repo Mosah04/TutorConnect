@@ -15,8 +15,8 @@
             <x-application-logo class="fill-current text-gray-500"/>
         </div>
         <div class="pb-8 px-4 mx-auto max-w-screen-xl text-center lg:pb-16">
-            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">TutorConnect</h1>
-            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-8 lg:px-10 dark:text-gray-400">
+            <h1 class="mb-4 text-4xl font-bold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">TutorConnect</h1>
+            <p class="mb-8 text-lg font-normal lg:text-xl sm:px-8 lg:px-10 dark:text-gray-400">
                 TutorConnect est une plateforme en ligne qui met en relation des tuteurs
                 qualifiés avec des étudiants cherchant à recevoir de l'aide dans divers domaines
                 académiques ou compétences spécialisées. L'application vise à offrir une solution

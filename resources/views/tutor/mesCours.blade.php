@@ -35,7 +35,7 @@
                         @foreach ($cours as $cour)
                             <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="px-4 py-2">
-                                    <img src="{{asset('storage/coursImages/'.$cour->image)}}" alt="" class=" w-auto h-8 mr-3 bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">
+                                    <img src="{{asset('storage/coursImages/'.$cour->image)}}" alt="" class=" w-[80%] h-8 mr-3 bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">
                                 </td>
 
                                 <td class="px-4 py-2">
@@ -79,23 +79,21 @@
                                     </svg>
                                 </button>
                                 <div id="{{$cour->id}}-dropdown" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-iphone-14-dropdown-button">
-                                        <li>
-                                            <a href="{{ URL::to ('/cours') }}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Voir</a>
-                                        </li>
-                                    </ul>
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="{{$cour->id."-button"}}">
-                                        <li>
-                                            <button type="button" data-modal-target="modifier-{{$cour->id}}-modal" data-modal-toggle="modifier-{{$cour->id}}-modal" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Modifier</button>
+                                        <li class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                            <a href="{{ URL::to ('/cours') }}">Voir</a>
+                                        </li>
+                                        <li class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                            <button type="button" data-modal-target="modifier-{{$cour->id}}-modal" data-modal-toggle="modifier-{{$cour->id}}-modal">Modifier</button>
+                                        </li>
+                                        <li class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                            <form action="{{route('deletecours', $cour->id)}}" class="m-0" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit">Supprimer</button>
+                                            </form>
                                         </li>
                                     </ul>
-                                    <div class="py-1">
-                                        <form action="{{route('deletecours', $cour->id)}}" class="m-0" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Supprimer</button>
-                                        </form>
-                                    </div>
                                 </div>
                             </td>
                           </tr>
@@ -111,30 +109,27 @@
                                             <span class="sr-only">Close modal</span>
                                         </button>
                                         <div class="px-6 py-6 lg:px-8">
-                                            <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Modifier le Cours</h3>
+                                            <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Modifier le cours</h3>
                                             <form class="space-y-6" action="{{url('/editcours')}}" method="POST" enctype="multipart/form-data">
                                             @csrf
-                                            <div>
-                                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Image</label>
-                                                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" name="image">
-                                            </div>
+
                                                 <div class="pb-3">
                                                     <label for="titre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre</label>
                                                     <input type="text" name="titre" id="titre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="INSTI-LOKOSSA" value="{{$cour->titre}}" required>
                                                 </div>
                                                 <div class="pb-3">
-                                                    <label for="vue" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vue</label>
-                                                    <input type="text" name="vue" id="vue" placeholder="Licence professionelle" value="{{$cour->vue}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                                                </div>
-                                                <div class="pb-3">
-                                                <label for="tarif" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarif</label>
-                                                <input type="text" name="tarif" id="tarif" placeholder="12550F" value="{{$cour->tarif}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                                                    <label for="tarif" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarif</label>
+                                                    <input type="text" name="tarif" id="tarif" placeholder="12550F" value="{{$cour->tarif}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                                                 </div>
                                                 <input type="hidden" name="coursId" value="{{$cour->id}}">
                                                 <div>
-                                                <button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                                                    Modifier
-                                                </button>
+                                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Image</label>
+                                                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" name="image">
+                                                </div>
+                                                <div class="flex justify-center pt-4">
+                                                    <button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                                        Modifier
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>
@@ -148,7 +143,7 @@
         </div>
     </div>
     @else
-        <p>Vous n'avez aucun cours !</p>
+        <p class="text-center">Vous n'avez ajouté aucun cours ! Commencez maintenant :)</p>
     @endif
     <div class="flex justify-center">
         <button data-modal-target="coursAc-modal" data-modal-toggle="coursAc-modal" class="inline-block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-4" type="button">
@@ -169,30 +164,27 @@
                     <span class="sr-only">Close modal</span>
                 </button>
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Ajouter le cours</h3>
+                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Ajouter un cours</h3>
                     <form class="space-y-6" action="{{url('/ajoutercours')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div>
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Image</label>
-                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" name="image">
+                        <label for="titre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre</label>
+                        <input type="text" name="titre" id="titre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Big-data" required>
                     </div>
-                        <div>
-                            <label for="titre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre</label>
-                            <input type="text" name="titre" id="titre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Big-data" required>
-                        </div>
-                        <div>
-                            <label for="vue" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vue</label>
-                            <input type="text" name="vue" id="vue" placeholder="1k de vues" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
-                        </div>
-                        <div>
+                    <input type="hidden" name="vue" value="0">
+                    <div>
                         <label for="tarif" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tarif</label>
                         <input type="text" name="tarif" id="tarif" placeholder="12550F" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                     </div>
-                        <div class="flex items-center gap-4">
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Ajoutez une bannière pour votre cours</label>
+                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" name="image">
+                    </div>
+                    <div class="flex justify-center gap-4">
                         <button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                                 Enregistrer
                         </button>
-                        </div>
+                    </div>
                     </form>
                 </div>
             </div>

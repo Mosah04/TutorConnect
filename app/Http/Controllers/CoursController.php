@@ -48,12 +48,10 @@ class CoursController extends Controller
     }
     public function modifiercours(Request $request){
         $this->validate($request, ['titre'=>'required',
-                                   'vue'=>'required',
                                    'tarif'=>'required',
                                    'image'=>'nullable|image|max:2048']);
         $cours = cours::find($request->input('coursId'));
         $cours->titre=$request->input('titre');
-        $cours->vue=$request->input('vue');
         $cours->tarif=$request->input('tarif');
         $cours->user_id=$request->user()->id;
         if($request->file('image')){

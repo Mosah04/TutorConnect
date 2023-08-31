@@ -6,7 +6,6 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfAuthenticated
@@ -22,6 +21,10 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                if(Auth::user()->role=='sage'){
+                    session()->put('page', 'tutor');
+                    return redirect()->intended(RouteServiceProvider::HOME);
+                }
                 return redirect()->intended(RouteServiceProvider::HOME);
             }
         }

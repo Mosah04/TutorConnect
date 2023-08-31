@@ -231,10 +231,7 @@ class ProfileController extends Controller
 
     public function setCompetences(Request $request){
             $request->validate(['competences'=>'required']);
-            foreach ($request->input('competences') as $competence) {
-                if(!$request->user()->competences->contains($competence))
-                    $request->user()->competences()->attach($competence);
-            }
+            $request->user()->competences()->sync($request->input('competences'));
             return redirect("/editCompetences");
     }
     public function retirerCompetence(Request $request, $competenceId){

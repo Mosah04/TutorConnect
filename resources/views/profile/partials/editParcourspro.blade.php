@@ -26,8 +26,8 @@
                     <tr class="border-b dark:border-gray-700">
                         <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$parcoursProfessionnel->entreprise}}</th>
                         <td class="px-4 py-3">{{$parcoursProfessionnel->poste}}</td>
-                        <td class="px-4 py-3">{{$parcoursProfessionnel->date_debut}}</td>
-                        <td class="px-4 py-3">{{$parcoursProfessionnel->date_fin}}</td>
+                        <td class="px-4 py-3">{{$parcoursProfessionnel->date_debut->translatedFormat('d M Y', 'fr')}}</td>
+                        <td class="px-4 py-3">{{is_null($parcoursProfessionnel->date_fin)?'':$parcoursProfessionnel->date_fin->translatedFormat('d M Y', 'fr')}}</td>
                         <td class="px-4 py-3 flex items-center justify-end">
                             <button id="{{$parcoursProfessionnel->id."-button"}}" data-dropdown-toggle="{{$parcoursProfessionnel->id}}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

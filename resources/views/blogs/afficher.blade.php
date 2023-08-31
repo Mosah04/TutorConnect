@@ -10,7 +10,7 @@
                 <img class="mr-4 w-16 h-16 rounded-full" src="{{asset('storage/usersImages/'.$user->image)}}" alt="Jese Leos">
                 <div>
                     <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">{{$user->name}}</a>
-                    <p class="text-base font-light text-gray-500 dark:text-gray-400">{{$user->specialite->nom}}</p>
+                    <p class="text-base font-light text-gray-500 dark:text-gray-400">{{$user->specialite?->nom}}</p>
                     <p class="text-base font-light text-gray-500 dark:text-gray-400">{{$blog->created_at->translatedFormat('d F Y','fr')}}</p>
                 </div>
             </div>
